@@ -1,0 +1,303 @@
+FORMAT: 1A
+HOST: https://edgeryders.eu/
+
+# Opencare APIs
+
+<p>Get primary and secondary data from the opencare project. </p>
+<ul>
+    <li><strong>Primary data </strong> refer to the online conversation (posts and comments). </li>
+    <li><strong>Secondary data</strong> refer to the ethnographic work done on the primary data (annotations and codes, or tags).</li>
+</ul>
+
+<p>Data from these APIs are published under a Creative Commons Attribution 4.0 license.
+</p>
+
+<a href = "https://github.com/opencarecc/opencare-data-documentation/blob/master/Data%20management%20plan/Data_in_Opencare.pdf">Learn more</a> on data in opencare.
+
+## Content collection [/opencare/content-anonymized]
+
+
+        + schema
+        
+        {
+            "$schema": "http://json-schema.org/schema#",
+            "license": "Creative Commons Attribution 4.0",
+            "url": "https://edgeryders.eu/opencare/content-anonymized",
+            "type": "object",
+            "properties": {
+                "nodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                        "node": {
+                            "type": "object",
+                            "properties": {
+                                "post_id": { 
+                                    "type": "string",
+                                    "description": "Identifier for this post"
+                                    },
+                                "title": {
+                                    "type": "string",
+                                    "description": "Post title"
+                                    },
+                                "content": {
+                                    "type": "string",
+                                    "description": "Full text of the post"
+                                    },
+                                "creation_date": {
+                                    "type": "date-time",
+                                    "description": "The comment's creation date."
+                                    },
+                                "type": {
+                                    "type": "string",
+                                    "description": "The Drupal content type (for example post, challenge response, etc.)"
+                                    },
+                                "group_id": {
+                                    "type": "string",
+                                    "description": "The identifier of the group (or project) on edgeryders.eu. Not relevant for this project." 
+                                    },
+                                "user_id": {
+                                    "type": "string",
+                                    "description": "The identifier of the author of the post."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }    
+            }
+        }
+
+
+### Get content [GET]
+
++ Response 200 (application/json)
+
+        {
+            nodes: [
+                {
+                    node: {
+                        post_id: "6936",
+                        title: "Building tweeting communities for mental health nursing with @WeMHNurses",
+                        content: " [@Noemi’s note] I was happy to connect with Emma Jones [...] ",                        creation_date: "Wed, 2016-11-02 16:43 +01:00 (Europe/Brussels)",
+                        type: "Challenge Response",
+                        group_id: "0",
+                        user_id: "9064"
+                    }
+                },  
+            ]
+        }
+
+
+## Comments collection [/opencare/comments-anonymized]
+
+        +schema 
+        {
+            "$schema": "http://json-schema.org/schema#",
+            "license": "Creative Commons Attribution 4.0",
+            "url": "https://edgeryders.eu/opencare/comments-anonymized",
+            "type": "object",
+            "properties": {
+                "nodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                        "node": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "description": "Comment title"
+                                    },
+                                "content": {
+                                    "type": "string",
+                                    "description": "Full text of the comment"
+                                    },
+                                "comment_id": {
+                                    "type": "string",
+                                    "description": "Identifier for this comment"
+                                    },
+                                "post_id": {
+                                    "type": "string",
+                                    "description": "Identifier for the post that started the thread that this comment is in."
+                                    },
+                                "parent_comment_id": {
+                                    "type": "string",
+                                    "description": "Identifier of the comment that this comment is addressed to. When = 0, the comment was addressed directly to the original post."
+                                    },
+                                "creation_date": {
+                                    "type": "date-time",
+                                    "description": "The comment's creation date."
+                                    },
+                                 "group_id": {
+                                    "type": "string",
+                                    "description": "The identifier of the group (or project) on edgeryders.eu. Not relevant for this project." 
+                                    },
+                                }
+                            }
+                        }
+                    }
+                }    
+            }
+        }
+
+
+
+### Get comments [GET]
+
++ Response 200 (application/json)
+
+        {
+            nodes: [
+                {
+                    node: {
+                            title: "Agree",
+                            content: " This kind of input really is helpful and i can already see a 'Citizens guide to supporting people in an emergency' style document that contains these kinds of ideas and responces. They key will be to get lots of people who have experience of working with refugees already, together with lots of people who have useful experience from other areas of life. Then both sides can bounce off each other. I still think that a hackathon like this would be best suited to taking place in Greece or Italy, where the incoming flow is still increasing and there is a high likelihood that another disaster may occur (i'm thinking about the recent Italian Earthquakes).  ",
+                            comment_id: "25294",
+                            post_id: "6926",
+                            user_id: "6559",
+                            parent_comment_id: "25289",
+                            creation_date: "Friday, November 4, 2016 - 09:18",
+                            group_id: "0"
+                        }
+                    },
+                ]
+            }
+
+
+## Annotations collection [/opencare/annotations]
+
+        + schema
+        {
+            "$schema": "http://json-schema.org/schema#",
+            "license": "Creative Commons Attribution 4.0",
+            "url": "https://edgeryders.eu/opencare/annotations",
+            "type": "object",
+            "properties": {
+                "nodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                        "node": {
+                            "type": "object",
+                            "properties": {
+                                "annotation_id": {
+                                    "type": "string",
+                                    "description": "Identifier for this annotation"
+                                    },
+                                "user_id": {
+                                    "type": "string",
+                                    "description": "Identifier for the creator of the annotation."
+                                    },
+                                "user_name": {
+                                    "type": "string",
+                                    "description": "Name of the creator of the annotation."
+                                    },
+                                "creation_date": {
+                                    "type": "date-time",
+                                    "description": "The annotation's creation date."
+                                    },
+                                "entity_id": {
+                                    "type": "string",
+                                    "description": "Identifier for the entity (post or comment) that was annotated."
+                                    },
+                                "entity_type": {
+                                    "type": "string",
+                                    "description": "Type of the entity that was annotated."
+                                    },
+                                "quote" : {
+                                    "type": "string",
+                                    "description": "The snippet of text that the annotations refers to."
+                                    },
+                                "tag_id": {
+                                    "type": "string",
+                                    "description": "Identifier of the tag (ethnographic code) associated with the quote."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+### Get annotations [GET]
+
++ Response 200 (application/json)
+
+        {
+            nodes: [
+                {
+                    node: {
+                        annotation_id: "10",
+                        user_id: "3892",
+                        user_name: "danohu",
+                        creation_date: "Monday, February 2, 2015 - 17:30",
+                        entity_id: "4266",
+                        entity_type: "node",
+                        quote: "non-hierarchical",
+                        tag_id: "963"
+                    }
+                },
+            ]
+        }
+        
+## Tags collection [/opencare/tags]
+
+        +schema
+        {
+            "$schema": "http://json-schema.org/schema#",
+            "license": "Creative Commons Attribution 4.0",
+            "url": "https://edgeryders.eu/opencare/tags",
+            "type": "object",
+            "properties": {
+                "nodes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                        "node": {
+                            "type": "object",
+                            "properties": {
+                                "name" : {
+                                    "type": "string",
+                                    "description": "The tag's name"
+                                    },
+                                "tag_id": {
+                                    "type": "string",
+                                    "description": "Identifier for this tag"
+                                    },
+                                "parent_name": {
+                                    "type": "string",
+                                    "description": "The name of the parent tag."
+                                    },
+                                "parent_id": {
+                                    "type: "string",
+                                    "description": "Identifier of the parent tag. If = 0, this tag is a top-level one."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+
+### Get tags [GET]
+
++ Response 200 (application/json)
+
+        {
+            nodes: [
+                {
+                    node: {
+                    name: "",
+                    tag_id: "1412",
+                    parent_name: "",
+                    parent_tag_id: "0"
+                    }
+                },
+            ]
+        }
